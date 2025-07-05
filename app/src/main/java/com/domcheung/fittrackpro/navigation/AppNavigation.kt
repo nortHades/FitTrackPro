@@ -11,6 +11,7 @@ import com.domcheung.fittrackpro.presentation.login.LoginScreen
 import com.domcheung.fittrackpro.presentation.register.RegisterScreen
 import com.domcheung.fittrackpro.presentation.main.MainTabScreen
 import com.domcheung.fittrackpro.presentation.splash.SplashScreen
+import com.domcheung.fittrackpro.presentation.test.TestDataScreen
 
 // Navigation routes
 object Routes {
@@ -19,6 +20,7 @@ object Routes {
     const val REGISTER = "register"
     const val MAIN = "main"       // Main app with tabs
     const val HOME = "home"       // Individual tab - for future deep linking
+    const val TEST_DATA = "test_data" // test data
 }
 
 @Composable
@@ -111,6 +113,10 @@ fun AppNavigation(
                     }
                 }
             )
+        }
+
+        composable(Routes.TEST_DATA) {
+            TestDataScreen()
         }
 
         // TODO: Add individual tab routes for deep linking

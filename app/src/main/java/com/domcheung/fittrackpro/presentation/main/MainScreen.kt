@@ -16,6 +16,7 @@ import com.domcheung.fittrackpro.presentation.progress.ProgressScreen
 import com.domcheung.fittrackpro.presentation.profile.ProfileScreen
 import com.domcheung.fittrackpro.presentation.model.MainTab
 import com.domcheung.fittrackpro.data.repository.AuthRepository
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun MainTabScreen(
@@ -24,6 +25,9 @@ fun MainTabScreen(
 ) {
     var selectedTab by remember { mutableStateOf(MainTab.HOME) }
     val context = LocalContext.current
+
+    // Add NavController for navigation to test screen
+    val navController = rememberNavController()
 
     Scaffold(
         bottomBar = {
@@ -55,9 +59,9 @@ fun MainTabScreen(
                 label = "tab_content"
             ) { tab ->
                 when (tab) {
-                    MainTab.HOME -> HomeScreen()
+                    MainTab.HOME -> HomeScreen(navController = navController) // Pass navController
                     MainTab.WORKOUT -> WorkoutScreen()
-                    MainTab.START -> HomeScreen() // Fallback, shouldn't be reached
+                    MainTab.START -> HomeScreen(navController = navController) // Fallback
                     MainTab.PROGRESS -> ProgressScreen()
                     MainTab.PROFILE -> ProfileScreen(
                         onSignOut = {

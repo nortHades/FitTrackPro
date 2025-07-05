@@ -5,6 +5,10 @@ import com.domcheung.fittrackpro.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+/**
+ * ViewModel for MainTabScreen
+ * Provides access to AuthRepository for sign out functionality
+ */
 @HiltViewModel
 class MainTabViewModel @Inject constructor(
     val authRepository: AuthRepository

@@ -1,8 +1,6 @@
 package com.domcheung.fittrackpro.presentation.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -10,14 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.domcheung.fittrackpro.ui.theme.HandDrawnShapes
+import androidx.navigation.NavController
+import com.domcheung.fittrackpro.navigation.Routes
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController? = null
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35,6 +36,11 @@ fun HomeScreen() {
 
         // Weekly overview card
         WeeklyOverviewCard()
+
+        if (navController != null) {
+            TestButtonSection(navController = navController)
+        }
+
 
         Spacer(modifier = Modifier.weight(1f))
     }
@@ -255,5 +261,69 @@ private fun WeeklyStatItem(
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+    }
+}
+
+
+//test button
+@Composable
+private fun TestButtonSection(navController: NavController) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(HandDrawnShapes.cardVariant2),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.BugReport,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.tertiary
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "🧪 Development Tools",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Button(
+                onClick = {
+                    navController.navigate(Routes.TEST_DATA)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(HandDrawnShapes.buttonDefault),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Science,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Test Data Layer")
+            }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Text(
+                text = "Test database operations and API integration",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onTertiaryContainer
+            )
+        }
     }
 }
